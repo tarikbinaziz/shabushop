@@ -1,0 +1,20 @@
+// images
+const imgLogo = "assets/images/logo.png";
+const imgOnb1 = "assets/images/onb1.png",
+      imgOnb2 = "assets/images/onb2.png",
+      imgOnb3 = "assets/images/onb3.png";
+const imgLogoWithoutText="assets/images/logo_wouttxt.png";
+const imgBanner="assets/images/banner.png";
+const imgP1="assets/images/p1.png";
+const imgP2="assets/images/p2.png";
+const imgP3="assets/images/p3.png";
+const imgTk="assets/images/tk.png";
+const imgfb="assets/images/fb.png";
+const imgGoogle="assets/images/google.png";
+const imgProfile="assets/images/profile.png";
+const imgMessenger="assets/images/messenger.png";
+const imgWhatsapp="assets/images/whatsapp.png";
+const imgInstagram="assets/images/instagram.png";
+const imgGirl="assets/images/girl.JPG";
+const imgBox="assets/images/box.png";
+const imgPayment="assets/images/payment.png";
