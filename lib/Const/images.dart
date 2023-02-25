@@ -18,3 +18,4 @@ const imgInstagram="assets/images/instagram.png";
 const imgGirl="assets/images/girl.JPG";
 const imgBox="assets/images/box.png";
 const imgPayment="assets/images/payment.png";
+const imgOrderPolicy="assets/images/order_policy.jpeg";

@@ -1,23 +1,35 @@
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../../Const/const.dart';
+import '../../Controller/youtube_controller.dart';
+import 'Category/Hair_care.dart';
+import 'Category/Make_up.dart';
+import 'Category/personal_care.dart';
+import 'Category/skin_care.dart';
 import 'Product Details/product_details.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final VideoController videoController = Get.put(VideoController());
 
   @override
   Widget build(BuildContext context) {
-    var index = 0;
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
-        toolbarHeight: 100,
+        toolbarHeight: 80,
         backgroundColor: Colors.transparent,
         elevation: 0,
         leadingWidth: 80,
-        //  systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.red),
+        systemOverlayStyle:
+            SystemUiOverlayStyle(statusBarColor: Colors.transparent),
         titleSpacing: -6,
         leading: Image.asset(
           imgLogoWithoutText,
@@ -61,49 +73,55 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                height: 124,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(14),
-                    image: DecorationImage(
-                        image: AssetImage(imgBanner), fit: BoxFit.fill)),
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        off20,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: bgColor,
-                            fontSize: 20),
-                      ),
-                      SizedBox(
-                        width: 140,
-                        child: Text(
-                          voucherForAll,
-                          style: TextStyle(
-                            color: bgColor.withOpacity(0.6),
+              HorizontalList(
+                itemCount: 3,
+                spacing: 16,
+                itemBuilder: (BuildContext context, int index) {
+                  return Container(
+                    height: 124,
+                    width: ContextExtensions(context).width() / 1.3,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(14),
+                        image: DecorationImage(
+                            image: AssetImage(imgBanner), fit: BoxFit.fill)),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            off20,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: bgColor,
+                                fontSize: 20),
                           ),
-                        ),
+                          SizedBox(
+                            width: 140,
+                            child: Text(
+                              voucherForAll,
+                              style: TextStyle(
+                                color: bgColor.withOpacity(0.6),
+                              ),
+                            ),
+                          ),
+                          4.heightBox,
+                          AppButton(
+                            text: shopNow,
+                            textStyle: TextStyle(fontWeight: FontWeight.normal),
+                            elevation: 0,
+                            padding: EdgeInsets.zero,
+                            textColor: mainColor,
+                            color: redeemButtonColor,
+                            shapeBorder: StadiumBorder(),
+                            onTap: () {},
+                          )
+                        ],
                       ),
-                      4.heightBox,
-                      AppButton(
-                        text: redeem,
-                        textStyle: TextStyle(fontWeight: FontWeight.normal),
-                        elevation: 0,
-                        padding: EdgeInsets.zero,
-                        textColor: mainColor,
-                        color: redeemButtonColor,
-                        shapeBorder: StadiumBorder(),
-                        onTap: () {},
-                      )
-                    ],
-                  ),
-                ),
+                    ),
+                  );
+                },
               ),
               24.heightBox,
               HorizontalList(
@@ -112,6 +130,13 @@ class HomeScreen extends StatelessWidget {
                   itemCount: productCategory.length,
                   itemBuilder: (context, index) {
                     return Text(productCategory[index])
+                        .onTap(() => index == 0
+                            ? PersonalCareScreen().launch(context)
+                            : index == 1
+                                ? SkinCareScreen().launch(context)
+                                : index == 2
+                                    ? HairCareScreen().launch(context)
+                                    : MakeupItemsScreen().launch(context))
                         .box
                         .roundedLg
                         .padding(EdgeInsets.all(12))
@@ -266,19 +291,22 @@ class HomeScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                         color: bottomNavContainerIconColor,
                       ),
-                      width: context.width() / 1.5,
+                      width: ContextExtensionss(context).width / 1.5,
                       child: Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: YoutubePlayer(
-                          controller: YoutubePlayerController(
+                          controller:
+                          YoutubePlayerController(
                             initialVideoId: youtubeList[index],
                             flags: YoutubePlayerFlags(
-                              autoPlay: true,
-                              loop: false,
-                              mute: true,
-                            ),
+                                mute: false,
+                                autoPlay: false,
+                                disableDragSeek: true,
+                                loop: false,
+                                enableCaption: false),
                           ),
-                          showVideoProgressIndicator: true,
+                          showVideoProgressIndicator: false,
+                          bufferIndicator: null,
                           bottomActions: [
                             CurrentPosition(),
                             ProgressBar(
@@ -294,6 +322,57 @@ class HomeScreen extends StatelessWidget {
                           //   playedColor: Colors.amber,
                           //   handleColor: Colors.amberAccent,
                           // ),
+                        ),
+                      ),
+                    );
+                  }),
+              24.heightBox,
+              Text(
+                customerReview,
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: titleColor),
+              ),
+              16.heightBox,
+              HorizontalList(
+                  itemCount: youtubeList.length,
+                  spacing: 20,
+                  runSpacing: 0,
+                  padding: EdgeInsets.zero,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      height: 150,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: bottomNavContainerIconColor,
+                      ),
+                      width: ContextExtensionss(context).width / 1.5,
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: YoutubePlayer(
+                          controller: YoutubePlayerController(
+                            initialVideoId: youtubeReviewList[index],
+                            flags: YoutubePlayerFlags(
+                                mute: false,
+                                autoPlay: false,
+                                disableDragSeek: true,
+                                loop: false,
+                                enableCaption: false),
+                          ),
+
+                          showVideoProgressIndicator: true,
+                          bufferIndicator: null,
+                          bottomActions: [
+                            CurrentPosition(),
+                            ProgressBar(
+                              isExpanded: true,
+                              colors: ProgressBarColors(
+                                  playedColor: Colors.amber,
+                                  handleColor: Colors.amberAccent),
+                            ),
+                            PlaybackSpeedButton(),
+                          ],
                         ),
                       ),
                     );
@@ -345,10 +424,10 @@ class HomeScreen extends StatelessWidget {
                   )
                       .box
                       .roundedSM
-                      .width(200)
+                      .width(166)
                       .height(350)
                       .padding(EdgeInsets.all(10))
-                  .margin(EdgeInsets.all(4))
+                      .margin(EdgeInsets.all(4))
                       .white
                       .shadowSm
                       .make();
@@ -364,8 +443,8 @@ class HomeScreen extends StatelessWidget {
                           width: 40,
                         )
                             .box
-                    .roundedSM
-                    .margin(EdgeInsets.all(4))
+                            .roundedSM
+                            .margin(EdgeInsets.all(4))
                             .border(color: mainColor.withOpacity(0.1))
                             .padding(EdgeInsets.symmetric(
                                 vertical: 10, horizontal: 20))

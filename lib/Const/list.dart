@@ -1,3 +1,9 @@
+import 'package:get/get.dart';
+
+import '../Screens/Home/Category/Hair_care.dart';
+import '../Screens/Home/Category/Make_up.dart';
+import '../Screens/Home/Category/personal_care.dart';
+import '../Screens/Home/Category/skin_care.dart';
 import 'const.dart';
 
 var onBoardingImageList = [
@@ -33,4 +39,22 @@ var youtubeList = [
   "WB89NjamBKE"
 ];
 
-var socialIcon=[imgMessenger,imgWhatsapp,imgInstagram];
+var youtubeReviewList = [
+  "f-vtcKBRGiw",
+  "TQOiZJ64aTM",
+  "oIDeOnDgXG0",
+  "XquuZAo8Lgc",
+  "iUlr8RbZFEg",
+  "uE1tR-egAmA",
+  "WB89NjamBKE"
+];
+
+var socialIcon = [imgMessenger, imgWhatsapp, imgInstagram];
+
+var categoryScreen = [
+  MakeupItemsScreen(),
+  PersonalCareScreen(),
+  SkinCareScreen(),
+  HairCareScreen(),
+
+];

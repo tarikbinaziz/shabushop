@@ -1,7 +1,5 @@
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:shabu_shop/Widget/custom_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 import '../../../Const/const.dart';
 
@@ -29,16 +27,17 @@ class ProductDetailsScreen extends StatelessWidget {
                 .padding(EdgeInsets.all(21))
                 .make(),
             20.widthBox,
-            Expanded(child: AppButton(
+            Expanded(
+                child: AppButton(
               color: mainColor,
               padding: EdgeInsets.symmetric(vertical: 22),
               elevation: 0,
-              shapeBorder:OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              onTap: (){},
+              shapeBorder:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+              onTap: () {},
               text: buyNow,
               textColor: bgColor,
-            )
-            )
+            ))
           ],
         ),
       ),
@@ -184,7 +183,81 @@ class ProductDetailsScreen extends StatelessWidget {
                   Divider(
                     color: Colors.black,
                     endIndent: 265,
-                  )
+                  ),
+                  Text(
+                    ponnerBiboronDetails,
+                    style: TextStyle(color: titleColor),
+                  ),
+                  24.heightBox,
+                  Text(
+                    organicRelatedProducts,
+                    style: TextStyle(
+                        color: titleColor, fontWeight: FontWeight.bold),
+                  ),
+                  16.heightBox,
+                  HorizontalList(
+                      itemCount: 6,
+                      runSpacing: 0,
+                      spacing: 16,
+                      itemBuilder: (_, index) {
+                        return Column(
+                          children: [
+                            Expanded(
+                              child: Container(
+                                width: double.infinity,
+                                color: Colors.white,
+                                child: Container(
+                                  margin: EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                    image: AssetImage("assets/images/pc1.JPG"),
+                                  )),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(
+                                width: context.width(),
+                                color: personalCareContainerColor,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: Column(
+                                    children: [
+
+                                      Text(
+                                        "DINDA BEAUTY BCW Advance Vitamin C Powder (50gm)",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(color: titleColor),
+                                      ),
+                                      Spacer(),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            imgTk,
+                                            width: 12,
+                                          ),
+                                          5.widthBox,
+                                          Text(
+                                            "200",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: priceColor),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 6,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ).box.height(200).width(150).shadowSm.make();
+                      })
                 ],
               ),
             )

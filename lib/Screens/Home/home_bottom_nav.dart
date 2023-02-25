@@ -19,15 +19,15 @@ class BottomNavBarScreen extends StatelessWidget {
       ProfileScreen()
     ];
 
-    return Obx(()=>
-       Scaffold(
-        body: pages.elementAt(c.currentIndex.value),
-        bottomNavigationBar: Container(
+    return Obx(() => Scaffold(
+          body: pages.elementAt(c.currentIndex.value),
+          bottomNavigationBar: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                   topRight: Radius.circular(30), topLeft: Radius.circular(30)),
               boxShadow: [
-                BoxShadow(color: Colors.black38, spreadRadius: 0, blurRadius: 2),
+                BoxShadow(
+                    color: Colors.black38, spreadRadius: 0, blurRadius: 2),
               ],
             ),
             child: ClipRRect(
@@ -54,7 +54,7 @@ class BottomNavBarScreen extends StatelessWidget {
                     items: [
                       BottomNavigationBarItem(
                           icon: Container(
-                             padding: EdgeInsets.all(6),
+                              padding: EdgeInsets.all(6),
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: c.currentIndex.value == 0
@@ -67,7 +67,7 @@ class BottomNavBarScreen extends StatelessWidget {
                           label: ''),
                       BottomNavigationBarItem(
                           icon: Container(
-                             padding: EdgeInsets.all(6),
+                              padding: EdgeInsets.all(6),
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: c.currentIndex.value == 1
@@ -108,8 +108,6 @@ class BottomNavBarScreen extends StatelessWidget {
               ),
             ),
           ),
-        )
-    );
-
+        ));
   }
 }

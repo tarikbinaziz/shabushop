@@ -1,4 +1,3 @@
-import 'package:flutter/services.dart';
 import 'package:velocity_x/velocity_x.dart';
 import '../../Const/const.dart';
 import 'package:antdesign_icons/antdesign_icons.dart';
@@ -13,18 +12,17 @@ class NotificationScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: bgColor,
         centerTitle: true,
-        systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: bgColor),
+      //  systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: bgColor),
         elevation: 0,
         leadingWidth: 80,
-        leading: Icon(
-          IconlyLight.arrow_left,
-          color: titleColor,
-        )
-            .box
-            .roundedFull
-            .color(profileIconContainerColor)
-            .padding(EdgeInsets.all(10))
-            .make(),
+        // leading: BackButton(
+        //   color: titleColor,
+        // )
+        //     .box
+        //     .roundedFull
+        //     .color(profileIconContainerColor)
+        //     .padding(EdgeInsets.all(10))
+        //     .make(),
         title: Text(
           notification,
           style: TextStyle(color: titleColor),
@@ -67,7 +65,6 @@ class NotificationScreen extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-
                         Text(
                           orderSuccess,
                           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),

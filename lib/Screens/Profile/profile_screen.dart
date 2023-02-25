@@ -1,35 +1,29 @@
-import 'package:flutter/services.dart';
+import 'package:nb_utils/nb_utils.dart';
+import 'package:shabu_shop/Screens/Notification/notification_screen.dart';
+import 'package:shabu_shop/Screens/Profile/About%20us/about_us.dart';
+import 'package:shabu_shop/Screens/Profile/App%20Version/app_version.dart';
+import 'package:shabu_shop/Screens/Profile/Personal%20Info/personal_info.dart';
+import 'package:shabu_shop/Screens/Profile/Privacy%20Policy/privacy_policy.dart';
+import 'package:shabu_shop/Screens/Profile/Return%20Policy/return_policy.dart';
+import 'package:shabu_shop/Screens/Profile/Truck%20Order/truck_order.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../../Const/const.dart';
+import '../../Widget/bottom_pages_appbar.dart';
+import 'Complain Zone/complain_zone.dart';
 import 'Feature/tittle_icon.dart';
+import 'How We Works/how_we_works.dart';
+import 'Payment Info/payment_info.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: bgColor,
-      appBar: AppBar(
-        backgroundColor: bgColor,
-        centerTitle: true,
-        systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: bgColor),
-        elevation: 0,
-        leadingWidth: 80,
-        leading: Icon(
-          IconlyLight.arrow_left,
-          color: titleColor,
-        )
-            .box
-            .roundedFull
-            .color(profileIconContainerColor)
-            .padding(EdgeInsets.all(10))
-            .make(),
-        title: Text(
-          profile,
-          style: TextStyle(color: titleColor),
-        ),
-      ),
+      appBar: customBottomPagesAppbar(text: profile),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -80,13 +74,23 @@ class ProfileScreen extends StatelessWidget {
                     color: myAccountColor.withOpacity(0.3)),
               ),
               16.heightBox,
-              titleIcon(text: personalInfo),
+              titleIcon(text: personalInfo).onTap(() {
+                PersonalInfoScreen().launch(context);
+              }),
               16.heightBox,
-              titleIcon(text: paymentInfomation),
+              titleIcon(text: paymentInfomation).onTap(() {
+                PaymentInfoScreen().launch(context);
+              }),
               16.heightBox,
               titleIcon(text: payoutInfomation),
               16.heightBox,
-              titleIcon(text: notification),
+              titleIcon(text: notification).onTap(() {
+                NotificationScreen().launch(context);
+              }),
+              16.heightBox,
+              titleIcon(text: tracking).onTap(() {
+                TrackOrderScreen().launch(context);
+              }),
               24.heightBox,
               Text(
                 information,
@@ -95,17 +99,41 @@ class ProfileScreen extends StatelessWidget {
                     color: myAccountColor.withOpacity(0.3)),
               ),
               16.heightBox,
-              titleIcon(text: appsVersion),
+              titleIcon(text: appsVersion).onTap(() {
+                AppVersion().launch(context);
+              }),
               16.heightBox,
-              titleIcon(text: howWeWorks),
+              titleIcon(text: howWeWorks).onTap(() {
+                HowWeWorksScreen().launch(context);
+              }),
               16.heightBox,
-              titleIcon(text: privacyPilicy),
+              titleIcon(text: privacyPilicy).onTap(() {
+                PrivacyPolicyScreen().launch(context);
+              }),
               16.heightBox,
-              titleIcon(text: notification),
+              titleIcon(text: returnPolicy).onTap(() {
+                ReturnPolicyScreen().launch(context);
+              }),
+              16.heightBox,
+              titleIcon(text: aboutUs).onTap(() {
+                AboutUsScreen().launch(context);
+              }),
+              16.heightBox,
+              AppButton(
+                onTap: () {
+                  ComplainZoneScreen().launch(context);
+                },
+                text: complainZone,
+                shapeBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                textStyle: TextStyle(color: Colors.white),
+                color: mainColor,
+              )
             ],
           ),
         ),
       ),
     );
   }
+
+
 }

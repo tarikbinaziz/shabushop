@@ -20,3 +20,5 @@ const borderColor=Color(0xFFEBEBEB);
 const profileIconContainerColor=Color(0xFFF3F3F4);
 const myAccountColor=Color(0xFF12121D);
 const notificationColor=Color(0xFFEFF2F5);
+const personalCareContainerColor=Color(0xFFf6f5f1);
+const priceColor=Color(0xFF78a206);

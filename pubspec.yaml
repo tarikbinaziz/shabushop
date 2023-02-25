@@ -45,6 +45,7 @@ dependencies:
   pinput: ^2.2.23
   youtube_player_flutter: ^8.1.2
   antdesign_icons: ^0.0.3
+  video_player: ^2.5.1
 
 dev_dependencies:
   flutter_test:
